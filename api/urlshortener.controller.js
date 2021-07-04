@@ -2,10 +2,11 @@ import UrlDAO from '../dao/urlDAO.js'
 
 export default class UrlCtrl {
     static async apiPostShortUrl(req, res, next) {
-        const originalUrl = req.body.original_url
+        const originalUrl = req.body.url
+        console.log(originalUrl)
         const addResponse = await UrlDAO.addUrl(originalUrl)
         if (addResponse.error) {
-            res.status(400).json(addResponse.error)
+            res.status(400).json(addResponse)
         } else {
             res.json(addResponse)
         }

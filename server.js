@@ -1,11 +1,12 @@
 import express from 'express'
 import cors from 'cors'
+import bodyParser from 'body-parser'
 // Locals
 import UrlShortener from './api/urlshortener.route.js'
 
 const app = express()
 
-app.use(express.json())
+app.use(bodyParser.urlencoded({extended: false}))
 app.use(cors({defaultSucessStatus: 200}))
 app.use(express.static("./public/"))
 

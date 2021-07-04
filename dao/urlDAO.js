@@ -19,7 +19,7 @@ export default class UrlDAO {
 
     static async addUrl(originalUrl) {
         try {
-            new URL("original_url")
+            new URL(originalUrl)
             const urlDoc = { original_url: originalUrl }
             const insertResponse = await urls.insertOne(urlDoc)
             return {
@@ -27,7 +27,7 @@ export default class UrlDAO {
                 short_url: insertResponse.ops[0]._id
             }
         } catch(err) {
-            console.error(err)
+            //console.error(err)
             return { error: 'invalid url' }
         }
     }
