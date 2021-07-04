@@ -1,4 +1,5 @@
 import mongodb from 'mongodb'
+import { isWebUri } from 'valid-url'
 const ObjectId = mongodb.ObjectID
 let urls
 
@@ -19,7 +20,9 @@ export default class UrlDAO {
 
     static async addUrl(originalUrl) {
         try {
-            new URL(originalUrl)
+            if (!isWebUri(originalUrl)) {
+              throw new Error({message: "Invalid format"})
+            }
             const urlDoc = { original_url: originalUrl }
             const insertResponse = await urls.insertOne(urlDoc)
             return {
